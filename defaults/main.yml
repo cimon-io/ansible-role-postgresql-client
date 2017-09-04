@@ -1,0 +1,7 @@
+---
+postgresql_client_version: "9.6"
+
+postgresql_client_repo: "deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_distribution_release }}-pgdg main"
+postgresql_client_repo_key: "https://www.postgresql.org/media/keys/ACCC4CF8.asc"
+
+postgresql_client_apt_pin_priority: 550

@@ -1,0 +1,5 @@
+# {{ ansible_managed }}
+
+Package: postgresql-client
+Pin: release o=apt.postgresql.org, version {{ postgresql_client_version }}*
+Pin-Priority: {{ postgresql_client_apt_pin_priority }}

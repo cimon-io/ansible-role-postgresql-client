@@ -1,0 +1,31 @@
+---
+- name: "add postgresql gpg key"
+  apt_key:
+    url: "{{ postgresql_client_repo_key }}"
+    state: present
+  tags:
+    - postgresql-client
+
+- name: "add postgresql repository"
+  apt_repository:
+    repo: "{{ postgresql_client_repo }}"
+    state: present
+  tags:
+    - postgresql-client
+
+- name: "pin postgresql-client package"
+  template:
+    src: "etc/apt/preferences.d/pgsql.pref.j2"
+    dest: "/etc/apt/preferences.d/pgsql.pref"
+    owner: root
+  tags:
+    - postgresql-client
+
+- name: "install postgresql-client"
+  apt:
+    name: "postgresql-client-{{ postgresql_client_version }}"
+    state: present
+    update_cache: yes
+    cache_valid_time: "{{ apt_cache_valid_time }}"
+  tags:
+    - postgresql-client
