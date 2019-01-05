@@ -3,6 +3,9 @@
   apt_key:
     url: "{{ postgresql_client_repo_key }}"
     state: present
+  retries: "{{ remote_package_retries }}"
+  register: gpg_key_result
+  until: gpg_key_result is succeeded
   tags:
     - postgresql-client
 
@@ -27,5 +30,8 @@
     state: present
     update_cache: yes
     cache_valid_time: "{{ apt_cache_valid_time }}"
+  retries: "{{ remote_package_retries }}"
+  register: apt_result
+  until: apt_result is succeeded
   tags:
     - postgresql-client
